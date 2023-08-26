@@ -107,4 +107,27 @@ app.MapGet("/paintcolors", () =>
     return Results.Ok(paintColors);
 });
 
+app.MapGet("/orders", () =>
+{
+    List<Order> ordersWithDetails = orders.Select(order =>
+    {
+        return new Order
+        {
+            Id = order.Id,
+            Timestamp = order.Timestamp,
+            WheelId = order.WheelId,
+            TechnologyId = order.TechnologyId,
+            PaintId = order.PaintId,
+            InteriorId = order.InteriorId,
+            Wheels = wheels.FirstOrDefault(w => w.Id == order.WheelId),
+            Technology = technologies.FirstOrDefault(t => t.Id == order.TechnologyId),
+            Paint = paintColors.FirstOrDefault(p => p.Id == order.PaintId),
+            Interior = interiors.FirstOrDefault(i => i.Id == order.InteriorId)
+        };
+    }).ToList();
+
+    return Results.Ok(ordersWithDetails);
+});
+// 点评: .Select等于 .map 或 .ForEach
+// .ToList()等于在.ForEach中加入开始 var orderWithDetails = new Order; 最后ordersWithDetails.Add(orderWithDetails);
 app.Run();
