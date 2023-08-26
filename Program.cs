@@ -130,4 +130,20 @@ app.MapGet("/orders", () =>
 });
 // 点评: .Select等于 .map 或 .ForEach
 // .ToList()等于在.ForEach中加入开始 var orderWithDetails = new Order; 最后ordersWithDetails.Add(orderWithDetails);
+
+app.MapPost("/orders", (Order newOrder) =>
+{
+    // Create a new id
+    newOrder.Id = orders.Count > 0 ? orders.Max(order => order.Id) + 1 : 1;
+
+    // Set the timestamp to the current server time
+    newOrder.Timestamp = DateTime.Now;
+
+    // Add the new order to the orders collection
+    orders.Add(newOrder);
+
+    return Results.Ok(newOrder);
+});
+
+
 app.Run();
