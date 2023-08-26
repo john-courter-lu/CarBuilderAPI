@@ -41,21 +41,25 @@ List<Wheels> wheels = new List<Wheels>
 // Orders Collection (You can leave this empty for now)
 List<Order> orders = new List<Order>();
 
+/* 
+
 // Now you have populated collections for paint colors, interiors, technologies, and wheels.
 // You can work with these collections to build your CarBuilderAPI logic.
 
 // Example: Accessing a paint color's price
-decimal silverPaintPrice = paintColors.Find(p => p.Color == "Silver")?.Price ?? 0;
+// decimal silverPaintPrice = paintColors.Find(p => p.Color == "Silver")?.Price ?? 0;
 // if the Find operation doesn't find a "Silver" paint color, or if the found paint color doesn't have a Price property (due to being null), the silverPaintPrice will be assigned the value of 0. If the Price property exists and is not null, then the value of that property will be assigned to silverPaintPrice.
-Console.WriteLine($"Silver Paint Price: {silverPaintPrice}");
+// Console.WriteLine($"Silver Paint Price: {silverPaintPrice}");
 
 // Example: Accessing an interior's material
-string charcoalFabricMaterial = interiors.Find(i => i.Material == "Charcoal Fabric")?.Material;
-Console.WriteLine($"Charcoal Fabric Material: {charcoalFabricMaterial}");
+// string charcoalFabricMaterial = interiors.Find(i => i.Material == "Charcoal Fabric")?.Material;
+// Console.WriteLine($"Charcoal Fabric Material: {charcoalFabricMaterial}");
 
 // Example: Accessing a technology package's ID
-int visibilityPackageId = technologies.Find(t => t.Package.Contains("Visibility Package"))?.Id ?? -1;
-Console.WriteLine($"Visibility Package ID: {visibilityPackageId}");
+// int visibilityPackageId = technologies.Find(t => t.Package.Contains("Visibility Package"))?.Id ?? -1;
+// Console.WriteLine($"Visibility Package ID: {visibilityPackageId}"); 
+
+*/
 
 //在上面增加List
 
@@ -82,7 +86,25 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 //模板结束. 上面的code是设置一个app来be served as a web API
 
-//下面, 创建endpoint
+//下面, 创建endpoint ; creat basic endpoints needed below;
+app.MapGet("/wheels", () =>
+{
+    return Results.Ok(wheels);
+});
 
+app.MapGet("/technologies", () =>
+{
+    return Results.Ok(technologies);
+});
+
+app.MapGet("/interiors", () =>
+{
+    return Results.Ok(interiors);
+});
+
+app.MapGet("/paintcolors", () =>
+{
+    return Results.Ok(paintColors);
+});
 
 app.Run();
