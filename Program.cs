@@ -39,7 +39,55 @@ List<Wheels> wheels = new List<Wheels>
 };
 
 // Orders Collection (You can leave this empty for now)
-List<Order> orders = new List<Order>();
+List<Order> orders = new List<Order>
+{
+    new Order
+    {
+        Id = 1,
+        Timestamp = DateTime.Now.AddDays(-3),
+        WheelId = 2,
+        TechnologyId = 3,
+        PaintId = 1,
+        InteriorId = 4
+    },
+    new Order
+    {
+        Id = 2,
+        Timestamp = DateTime.Now.AddDays(-2),
+        WheelId = 1,
+        TechnologyId = 2,
+        PaintId = 3,
+        InteriorId = 2
+    },
+    new Order
+    {
+        Id = 3,
+        Timestamp = DateTime.Now.AddDays(-1),
+        WheelId = 4,
+        TechnologyId = 4,
+        PaintId = 2,
+        InteriorId = 3
+    },
+    new Order
+    {
+        Id = 4,
+        Timestamp = DateTime.Now,
+        WheelId = 3,
+        TechnologyId = 1,
+        PaintId = 4,
+        InteriorId = 1
+    },
+    new Order
+    {
+        Id = 5,
+        Timestamp = DateTime.Now.AddHours(-6),
+        WheelId = 1,
+        TechnologyId = 3,
+        PaintId = 2,
+        InteriorId = 4
+    }
+};
+
 
 /* 
 
