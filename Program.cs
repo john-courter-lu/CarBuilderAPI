@@ -71,7 +71,7 @@ List<Order> orders = new List<Order>
     new Order
     {
         Id = 4,
-        Timestamp = DateTime.Now,
+        Timestamp = DateTime.Now.AddHours(-12),
         WheelId = 3,
         TechnologyId = 1,
         PaintId = 4,
@@ -119,16 +119,29 @@ builder.Services.Configure<JsonOptions>(options =>
 {
     options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
+// Set the JSON serializer options end
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// add CORS, Cross-Origin Resource Sharing
+builder.Services.AddCors();
+
 var app = builder.Build();
+
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    // add Cors
+    app.UseCors(options =>
+            {
+                options.AllowAnyOrigin();
+                options.AllowAnyMethod();
+                options.AllowAnyHeader();
+            });
+    // Our API is now telling the browser that it is safe to request the data from any origin.
 }
 
 app.UseHttpsRedirection();
