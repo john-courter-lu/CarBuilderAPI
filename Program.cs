@@ -170,7 +170,11 @@ app.MapGet("/paintcolors", () =>
 
 app.MapGet("/orders", () =>
 {
-    List<Order> ordersWithDetails = orders.Select(order =>
+    List<Order> ordersToBeFulfilled = orders.FindAll(order =>
+    order.DateFulfilled == null);
+    // 也可以用.Where 但是 要加.ToList()
+
+    List<Order> ordersWithDetails = ordersToBeFulfilled.Select(order =>
     {
         return new Order
         {
