@@ -183,7 +183,9 @@ app.MapGet("/orders", () =>
             Wheels = wheels.FirstOrDefault(w => w.Id == order.WheelId),
             Technology = technologies.FirstOrDefault(t => t.Id == order.TechnologyId),
             Paint = paintColors.FirstOrDefault(p => p.Id == order.PaintId),
-            Interior = interiors.FirstOrDefault(i => i.Id == order.InteriorId)
+            Interior = interiors.FirstOrDefault(i => i.Id == order.InteriorId),
+            //TotalCost = order.TotalCost 
+            //这是会带来compiler error的, 因为 calculated properties is read-only. 这也是不需要的, 因为会自动计算, 会根据the getter of the TotalCost property 里面的logic
         };
     }).ToList();
 
