@@ -231,6 +231,6 @@ app.MapPost("/orders/{orderId}/fulfill", (int orderId) =>
 // 不确定是否要最后的return, 因为HoneyRaesAPI中没有return. 但是要在if中加入return 就必须在最后也加入return, 否则compiler error.
 // 我决定放弃. 我不知道为什么. 
 // 我可以在HoneyRaesAPI中, 再试试. 
-// 问题: 为何有些MapPost需要return, 有些不需要呢.
+// 问题: 为何有些MapPost需要return, 有些不需要呢.要是加入return,则会返回Error: response status is 500
 
 app.Run();
