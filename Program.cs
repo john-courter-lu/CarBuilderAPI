@@ -186,6 +186,8 @@ app.MapGet("/orders", () =>
             Interior = interiors.FirstOrDefault(i => i.Id == order.InteriorId),
             //TotalCost = order.TotalCost 
             //这是会带来compiler error的, 因为 calculated properties is read-only. 这也是不需要的, 因为会自动计算, 会根据the getter of the TotalCost property 里面的logic
+            DateFulfilled = order.DateFulfilled
+            //这要是没有的话, 用 fetch get 或http get的order的DateFulfilled都是初始值/null.
         };
     }).ToList();
 
@@ -208,5 +210,23 @@ app.MapPost("/orders", (Order newOrder) =>
     return Results.Ok(newOrder);
 });
 
+app.MapPost("/orders/{orderId}/fulfill", (int orderId) =>
+{
+
+    Order orderToFulfill = orders.FirstOrDefault(obj => obj.Id == orderId);
+
+    //if (orderToFulfill == null)
+    //{ return Results.NotFound(); }
+
+    orderToFulfill.DateFulfilled = DateTime.Now;
+
+    //return Results.Ok(orderToFulfill);
+
+});
+// 注意是{orderId} 而不是${orderId}, 没有 $
+// 不确定是否要最后的return, 因为HoneyRaesAPI中没有return. 但是要在if中加入return 就必须在最后也加入return, 否则compiler error.
+// 我决定放弃. 我不知道为什么. 
+// 我可以在HoneyRaesAPI中, 再试试. 
+// 问题: 为何有些MapPost需要return, 有些不需要呢.
 
 app.Run();

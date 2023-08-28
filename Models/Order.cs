@@ -17,6 +17,7 @@ public class Order
         get
         { return Wheels.Price + Technology.Price + Paint.Price + Interior.Price; }
     }
+    public DateTime? DateFulfilled { get; set; }
 }
 
 // 注意: 当在Order class中增加了properties,如calculated properties, 要重启dotnet watch run, 因为不会hotload; 所以如果结果不正确, 在修改code前, 重启一下.
